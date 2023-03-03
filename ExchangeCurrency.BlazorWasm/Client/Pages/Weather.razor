@@ -8,17 +8,17 @@
 <MudPaper Elevation="1" Class="d-flex flex-row flex-wrap justify-content-around" Width="100%">
     <MudPaper Width="30%">
         <MudText Align="Align.Center" Color="Color.Primary" Typo="Typo.subtitle1">Write, click and Convert</MudText>
-        <MudTextField T="string" Label="C°" OnBlur="@(()=>baseToCalculate('C'))" TextChanged="ValidateInput" @bind-Value="weatherConversor.GradeC" />
-        <MudTextField T="string" Label="F°" OnBlur="@(()=>baseToCalculate('F'))" TextChanged="ValidateInput" @bind-Value="weatherConversor.GradeF" />
-        <MudTextField T="string" Label="K°" OnBlur="@(()=>baseToCalculate('K'))" TextChanged="ValidateInput" @bind-Value="weatherConversor.GradeK" />
+        <MudTextField Class="my-4" T="string" Label="C°" OnBlur="@(()=>baseToCalculate('C'))" TextChanged="ValidateInput" @bind-Value="weatherConversor.GradeC" />
+        <MudTextField Class="my-4" T="string" Label="F°" OnBlur="@(()=>baseToCalculate('F'))" TextChanged="ValidateInput" @bind-Value="weatherConversor.GradeF" />
+        <MudTextField Class="my-4" T="string" Label="K°" OnBlur="@(()=>baseToCalculate('K'))" TextChanged="ValidateInput" @bind-Value="weatherConversor.GradeK" />
     </MudPaper>
     <MudPaper Elevation="1" Class="align-self-center">
         <MudButton Color="Color.Primary" StartIcon="@Icons.Material.Filled.ArrowForward" Disabled="@(!success)" OnClick="CalculateConversion"> Convert</MudButton>
     </MudPaper>
     <MudPaper Elevation="1" Width="30%;">
-        <MudField>C°: @results[0]</MudField>
-        <MudField>F°: @results[1]</MudField>
-        <MudField>K°: @results[2]</MudField>
+        <MudField Class="my-4">C°: @results[0]</MudField>
+        <MudField Class="my-4">F°: @results[1]</MudField>
+        <MudField Class="my-4">K°: @results[2]</MudField>
     </MudPaper>
 </MudPaper>
 
@@ -28,22 +28,28 @@
         @Errors
     </MudText>
 }
-<MudDivider />
 
+<MudDivider />
+<div class="container-fluid text-center">
 @if (!string.IsNullOrEmpty(results[0])){
-    if (double.Parse(results[0]) >= 10 && double.Parse(results[0])<10.1)
+    if (double.Parse(results[0]) <= 10)
     {
-        <MudImage Height="200" Width="400" Src="img/cold.jpg" Alt="It's cold'" Elevation="25" Class="rounded-lg" />
+        <MudImage Height="200" Width="400" Src="img/cold.jpg" Alt="It's cold'" Elevation="25" Class="rounded-lg my-4" />
+        <MudText Color="Color.Info" Align="Align.Center" Typo="Typo.body1">People normally consider that it's cold</MudText>
     }
     if (double.Parse(results[0]) >= 10.1 && double.Parse(results[0])<=30)
     {
-        <MudImage Height="200" Width="400" Src="img/sunny.png" Alt="It's good'" Elevation="25" Class="rounded-lg" />
+        <MudImage Height="200" Width="400" Src="img/sunny.png" Alt="It's good'" Elevation="25" Class="rounded-lg my-4" />
+        <MudText Color="Color.Success" Align="Align.Center" Typo="Typo.body1">People normally consider that it's a good weather</MudText>
     }
     if (double.Parse(results[0]) >= 30.1)
     {
-        <MudImage Height="200" Width="400" Src="img/derretir.png" Alt="It's good'" Elevation="25" Class="rounded-lg" />
+        <MudImage Height="200" Width="400" Src="img/derretir.png" Alt="It's good'" Elevation="25" Class="rounded-lg my-4" />
+        <MudText Color="Color.Warning" Align="Align.Center" Typo="Typo.body1">People normally consider that it's really hot weather'</MudText>
     }
 }
+
+</div>
 
 
 @code {
